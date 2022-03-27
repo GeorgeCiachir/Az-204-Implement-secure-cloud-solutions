@@ -22,16 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.OffsetDateTime;
 
 @RestController
-@RequestMapping
-public class KeyVaultController {
+@RequestMapping("/secrets")
+public class SeecretsKeyVaultController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KeyVaultController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SeecretsKeyVaultController.class);
 
     @Autowired
     private SecretClient secretClient;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/secret")
+    @PostMapping
     public void addSecret(@RequestBody AddSecretCommand addSecretCommand) {
         LOG.info("Adding secret");
         secretClient.setSecret(new KeyVaultSecret(addSecretCommand.name, addSecretCommand.value)
@@ -39,27 +39,27 @@ public class KeyVaultController {
                         .setExpiresOn(OffsetDateTime.now().plusYears(1))));
     }
 
-    @GetMapping(value = "/secret/{name}")
+    @GetMapping(value = "/{name}")
     public String retrieveSecret(@PathVariable String name) {
         LOG.info("Retrieving a secret");
         return secretClient.getSecret(name).getValue();
     }
 
-    @DeleteMapping(value = "/secret/{name}")
+    @DeleteMapping(value = "/{name}")
     public void delete(@PathVariable String name) {
         LOG.info("Deleting a secret");
         SyncPoller<DeletedSecret, Void> deletedBankSecretPoller
-                = secretClient.beginDeleteSecret("BankAccountPassword");
+                = secretClient.beginDeleteSecret(name);
 
         PollResponse<DeletedSecret> deletedBankSecretPollResponse = deletedBankSecretPoller.poll();
 
-        System.out.println("Deleted Date %s" + deletedBankSecretPollResponse.getValue().getDeletedOn().toString());
-        System.out.printf("Deleted Secret's Recovery Id %s", deletedBankSecretPollResponse.getValue().getRecoveryId());
+        LOG.info("Deleted Date {}" + deletedBankSecretPollResponse.getValue().getDeletedOn().toString());
+        LOG.info("Deleted Secret's Recovery Id {}", deletedBankSecretPollResponse.getValue().getRecoveryId());
 
         // Key is being deleted on server.
         deletedBankSecretPoller.waitForCompletion();
 
         // If the key vault is soft-delete enabled, then for permanent deletion  deleted secrets need to be purged.
-        secretClient.purgeDeletedSecret("BankAccountPassword");
+        secretClient.purgeDeletedSecret("name");
     }
 }
