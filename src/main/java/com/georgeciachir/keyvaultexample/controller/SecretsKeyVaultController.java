@@ -1,4 +1,4 @@
-package com.georgeciachir.keyvaultexample;
+package com.georgeciachir.keyvaultexample.controller;
 
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
@@ -6,6 +6,7 @@ import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.models.DeletedSecret;
 import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
 import com.azure.security.keyvault.secrets.models.SecretProperties;
+import com.georgeciachir.keyvaultexample.AddSecretCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ import java.time.OffsetDateTime;
 
 @RestController
 @RequestMapping("/secrets")
-public class SeecretsKeyVaultController {
+public class SecretsKeyVaultController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SeecretsKeyVaultController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SecretsKeyVaultController.class);
 
     @Autowired
     private SecretClient secretClient;

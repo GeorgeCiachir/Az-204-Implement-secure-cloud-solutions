@@ -1,4 +1,4 @@
-package com.georgeciachir.keyvaultexample;
+package com.georgeciachir.keyvaultexample.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import static java.util.stream.Collectors.toMap;
 @RequestMapping("/configuration")
 public class ConfigController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SeecretsKeyVaultController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConfigController.class);
 
     @GetMapping
     public Map<String, String> retrieveSecret() {
