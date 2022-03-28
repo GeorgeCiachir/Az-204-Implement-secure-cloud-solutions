@@ -1,5 +1,5 @@
 # Creating the app
-Documentation [here](https://github.com/microsoftgraph/msgraph-training-java/tree/main/demo):
+The application in this project is created based on [here](https://github.com/microsoftgraph/msgraph-training-java/tree/main/demo):
 
 Before running the app, it must be registered with Azure
 Steps:
