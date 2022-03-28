@@ -22,7 +22,7 @@
              There is a "Managed Identity" Azure service for this
           - in either case, get the created object id of the newly created identity
         - go back to the key vault and add a policy for the newly created app service. Basically add te previously created identity
-          and add some permissions for accessing the key vault
+          and add some permissions (access policies for keys, secrets or certificates) for accessing the key vault
         - deploy the app in App Service. That's it, and it all works because the App Service app is registered with the key vault
      2. The application can access the vault from outside Azure, using an `AzureCredentialBuilder`
         - for this to be possible, we need to register the application with Azure AD
@@ -75,3 +75,6 @@
 - Because of the dangers of purging the key, soft delete and purge protection are automatically enable on the key vault
   when allocating a key for encryption
 - Also, the storage itself is registered with the key vault and receives an application access policy
+
+## Working with certificates
+- just like working with key and secrets

@@ -1,6 +1,8 @@
 package com.georgeciachir.keyvaultexample;
 
 import com.azure.identity.DefaultAzureCredentialBuilder;
+import com.azure.security.keyvault.certificates.CertificateClient;
+import com.azure.security.keyvault.certificates.CertificateClientBuilder;
 import com.azure.security.keyvault.keys.KeyClient;
 import com.azure.security.keyvault.keys.KeyClientBuilder;
 import com.azure.security.keyvault.secrets.SecretClient;
@@ -24,6 +26,14 @@ public class ClientConfiguration {
     @Bean
     public KeyClient keyClient() {
         return new KeyClientBuilder()
+                .vaultUrl(KEY_VAULT_URI)
+                .credential(new DefaultAzureCredentialBuilder().build())
+                .buildClient();
+    }
+
+    @Bean
+    public CertificateClient certificateClient() {
+        return new CertificateClientBuilder()
                 .vaultUrl(KEY_VAULT_URI)
                 .credential(new DefaultAzureCredentialBuilder().build())
                 .buildClient();
