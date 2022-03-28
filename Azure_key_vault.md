@@ -14,7 +14,7 @@
 - Steps:
   1. create the vault and from the overview page grab the vault url, needed for the app
   2. we then need to register this application to the vault. There are several ways to do this:
-     1. The application can access the key vault only from within Azure:   
+     1. The application can access the key vault only from within Azure (using managed identities)
         - create an app service
         - create an identity for this app service -> in the app service page, go to the Identity section. There are 2 options here
           - "System assigned" identity tab, toggle the status to ON
