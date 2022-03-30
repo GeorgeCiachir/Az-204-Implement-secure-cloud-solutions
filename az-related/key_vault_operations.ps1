@@ -17,6 +17,15 @@ az keyvault create `
     --resource-group $resourceGroup `
     --location $location
 
+az keyvault secret set `
+    --vault-name $vaultName `
+    --name "password" `
+    --value "1234"
+
+az keyvault secret show `
+    --vault-name $vaultName `
+    --name "password"
+
 #########################################  ARM
 
 New-AzResourceGroupDeployment `
