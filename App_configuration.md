@@ -128,3 +128,5 @@ az appconfig identity assign `
     --name myTestAppConfigStore ` 
     --identities /subscriptions/[subscription id]/resourcegroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myUserAssignedIdentity
 ```
+
+

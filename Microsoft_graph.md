@@ -13,3 +13,5 @@ Steps:
    `To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code DDY6LYCAF to authenticate.`
 7. Note that there are 2 apps in this maven/springboot project and even if you start this app on its own, the logging dependencies 
    will kick in 
+
+![img_2.png](img_2.png)
